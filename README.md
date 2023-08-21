@@ -1,6 +1,6 @@
 # xterminal-inken-viteshell-starter
 
-Build your web-based CLI application 
+Bootstrap your web-based CLI application 
 
 ![](./media/preview.png)
 

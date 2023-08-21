@@ -2,7 +2,7 @@
   "name": "xterminal-inken-viteshell-starter",
   "private": true,
   "version": "0.0.0",
-  "description": "",
+  "description": "Bootstrap your web-based CLI application",
   "type": "module",
   "scripts": {
     "dev": "vite",
