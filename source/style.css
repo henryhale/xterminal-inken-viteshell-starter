@@ -1,0 +1,42 @@
+@import url("xterminal/dist/xterminal.css");
+
+*, *::after, *::before {
+    box-sizing: border-box;
+}
+
+html, body {
+    padding: 0;
+    margin: 0;
+}
+
+#app {
+    height: 100vh;
+}
+
+.greeting {
+    text-align: center;
+}
+
+a {
+    color: currentColor;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+@media screen and (min-width: 800px) {
+    body {
+        display: flex;
+        align-items: center;
+        height: 100vh;
+        background-color: #c7c2c2;
+    }
+    #app {
+        width: 720px;
+        height: 70vh;
+        margin: 0 auto;
+        border: 10px outset gray;
+    }
+}

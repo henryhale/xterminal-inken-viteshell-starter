@@ -1,0 +1,36 @@
+{
+  "name": "xterminal-inken-viteshell-starter",
+  "private": true,
+  "version": "0.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/henryhale/xterminal-inken-viteshell-starter.git"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Henry Hale",
+    "url": "https://github.com/henryhale"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/henryhale/xterminal-inken-viteshell-starter/issues"
+  },
+  "homepage": "https://github.com/henryhale/xterminal-inken-viteshell-starter#readme",
+  "dependencies": {
+    "inken": "^1.0.3",
+    "viteshell": "^0.4.0",
+    "xterminal": "^2.0.10"
+  },
+  "devDependencies": {
+    "typescript": "^5.1.6",
+    "vite": "^4.4.9"
+  }
+}
