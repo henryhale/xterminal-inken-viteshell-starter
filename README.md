@@ -1,12 +1,18 @@
-# xterminal-inken-viteshell-starter
+<div align=center>
+
+# VIX
+
+[ViteShell](https://github.com/henryhale/viteshell) + [Inken](https://github.com/henryhale/inken) + [XTerminal](https://github.com/henryhale/xterminal)
 
 Bootstrap your web-based CLI application 
 
 ![](./media/preview.png)
 
+</div>
+
 ## QuickStart
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/henryhale/xterminal-inken-viteshell-starter)
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/henryhale/vix)
 
 ## Development
 
