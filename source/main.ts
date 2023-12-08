@@ -3,6 +3,7 @@ import "./style.css";
 import XTerminal from "xterminal";
 import ViteShell from "viteshell";
 import { red, green, cyan, gray, italic, dim } from "inken";
+import store from "./store";
 
 // create a shell
 const vsh = new ViteShell();
@@ -11,14 +12,24 @@ const vsh = new ViteShell();
 const term = new XTerminal();
 
 // connect the shell to the terminal
-vsh.onoutput = (data: string | number) => term.write(data);
-vsh.onerror = (reason: string) => term.write(red(reason).toString());
+vsh.onoutput = (data: string) => {
+    term.write(green(data).toString());
+}
+
+vsh.onerror = (reason: string) => {
+    term.write(red(reason).toString());
+};
+
 vsh.onclear = term.clear.bind(term);
-vsh.onexit = term.dispose.bind(term);
+
+vsh.onexit = () => {
+    store.write(vsh.exportState());
+    term.dispose.bind(term);
+};
 
 // pass user input to the shell
-term.on("data", async (line: unknown) => {
-    await vsh.execute(line as string);
+term.on("data", async (line) => {
+    await vsh.execute(line);
 });
 
 // abort execution on CTRL+C
@@ -32,10 +43,10 @@ term.on("keypress", (ev: unknown) => {
 
 // Configure shell
 // prompt style
-vsh.env["PS1"] = `\n${red("┌[")}${green("$USERNAME")}@${cyan("$HOSTNAME")}${red("]\n└$")} `;
+vsh.env["PS1"] = `${red("┌[")}${green("$USERNAME")}@${cyan("$HOSTNAME")}${red("]\n└$")} `;
 
 // alias
-vsh.alias["print"] = "echo";
+vsh.alias["println"] = "echo";
 
 // add a custom command
 vsh.addCommand("login", {
@@ -59,9 +70,10 @@ function greetUser() {
 
 ${green(`WELCOME TO THE COMMAND LINE INTERFACE`)}
 
-${dim(italic("powered by")+"")}
+${dim(italic("powered by") + "")}
 
-${gray(`<a href="https://github.com/henryhale/viteshell">ViteShell</a> ~ <a href="https://github.com/henryhale/inken">Inken</a> ~ <a href="https://github.com/henryhale/xterminal">XTerminal</a>`)}
+${gray(`<a href="https://github.com/henryhale/viteshell">ViteShell</a> ~ <a href="https://github.com/henryhale/inken">Inken</a> ~ <a href="https://github.com/henryhale/xterminal">XTerminal</a>
+`)}
 </div>`;
 }
 
@@ -71,5 +83,17 @@ term.on("clear", () => term.write(greetUser()));
 // setup the terminal
 term.mount("#app");
 
-// let's go
-vsh.init();
+// restore previously stored shell state
+window.onload = () => {
+    const backup = store.read();
+    if (backup) vsh.loadState(backup);
+    else store.write(vsh.exportState());
+
+    // let's go
+    vsh.init();
+};
+
+// backup state to localstorage
+window.onunload = () => {
+    store.write(vsh.exportState());
+};
