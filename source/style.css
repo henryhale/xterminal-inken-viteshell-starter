@@ -26,10 +26,23 @@ a:hover {
     text-decoration: underline;
 }
 
+.reload {
+    margin: 1.5rem auto;
+    padding: 10px 15px;
+}
+
+.reload a {
+    display: inline-block;
+    margin: 1rem 0;
+    padding: 8px 10px;
+    border: 1px solid red;
+}
+
 @media screen and (min-width: 800px) {
     body {
         display: flex;
         align-items: center;
+        justify-content: center;
         height: 100vh;
         background-color: #c7c2c2;
     }

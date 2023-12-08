@@ -1,9 +1,9 @@
 import "./style.css";
 
-import XTerminal from "xterminal";
+import XTerminal, { IKeyPress } from "xterminal";
 import ViteShell from "viteshell";
-import { red, green, cyan, gray, italic, dim } from "inken";
-import store from "./store";
+import { red, green, cyan } from "inken";
+import { store, greetUser } from "./util";
 
 // create a shell
 const vsh = new ViteShell();
@@ -24,7 +24,12 @@ vsh.onclear = term.clear.bind(term);
 
 vsh.onexit = () => {
     store.write(vsh.exportState());
-    term.dispose.bind(term);
+    term.dispose();
+
+    document.body.innerHTML =
+        "<div class='reload'>The terminal process terminated with code: " + 
+        vsh.env["?"] + 
+        "<br/> <a href='./'>Reload</a></div>";
 };
 
 // pass user input to the shell
@@ -33,17 +38,16 @@ term.on("data", async (line) => {
 });
 
 // abort execution on CTRL+C
-term.on("keypress", (ev: unknown) => {
-    const evt = ev as KeyboardEvent;
-    if (evt.ctrlKey && evt.key === "c") {
-        evt.preventDefault();
+term.on("keypress", (ev: IKeyPress) => {
+    if (ev.ctrlKey && ev.key.toLowerCase() === "c") {
+        ev.cancel();
         vsh.abort();
     }
 });
 
 // Configure shell
 // prompt style
-vsh.env["PS1"] = `${red("┌[")}${green("$USERNAME")}@${cyan("$HOSTNAME")}${red("]\n└$")} `;
+vsh.env["PS1"] = "" + red("┌[") + green("$USERNAME") + red("@") + cyan("$HOSTNAME") + red("]\n└$");
 
 // alias
 vsh.alias["println"] = "echo";
@@ -63,20 +67,6 @@ vsh.addCommand("login", {
     },
 });
 
-// greeting message
-function greetUser() {
-    return `<div class="greeting">
-<img src="xterminal.png" width="45" />
-
-${green(`WELCOME TO THE COMMAND LINE INTERFACE`)}
-
-${dim(italic("powered by") + "")}
-
-${gray(`<a href="https://github.com/henryhale/viteshell">ViteShell</a> ~ <a href="https://github.com/henryhale/inken">Inken</a> ~ <a href="https://github.com/henryhale/xterminal">XTerminal</a>
-`)}
-</div>`;
-}
-
 // re-write the greeting on clear
 term.on("clear", () => term.write(greetUser()));
 
@@ -93,7 +83,8 @@ window.onload = () => {
     vsh.init();
 };
 
-// backup state to localstorage
+// backup state to localstorage & cleanup
 window.onunload = () => {
     store.write(vsh.exportState());
+    term.dispose();
 };
