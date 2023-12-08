@@ -1,5 +1,5 @@
 {
-  "name": "xterminal-inken-viteshell-starter",
+  "name": "vix",
   "private": true,
   "version": "0.0.0",
   "description": "Bootstrap your web-based CLI application",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/henryhale/xterminal-inken-viteshell-starter.git"
+    "url": "git+https://github.com/henryhale/vix.git"
   },
   "keywords": [],
   "author": {
@@ -21,16 +21,16 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/henryhale/xterminal-inken-viteshell-starter/issues"
+    "url": "https://github.com/henryhale/vix/issues"
   },
-  "homepage": "https://github.com/henryhale/xterminal-inken-viteshell-starter#readme",
+  "homepage": "https://github.com/henryhale/vix#readme",
   "dependencies": {
     "inken": "^1.0.3",
-    "viteshell": "^0.4.0",
-    "xterminal": "^2.0.10"
+    "viteshell": "^0.6.1",
+    "xterminal": "^2.1.7"
   },
   "devDependencies": {
-    "typescript": "^5.1.6",
-    "vite": "^4.4.9"
+    "typescript": "^5.3.3",
+    "vite": "^5.0.6"
   }
 }
