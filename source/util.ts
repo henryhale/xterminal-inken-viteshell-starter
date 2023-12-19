@@ -1,4 +1,4 @@
-import { dim, gray, green, italic  } from "inken";
+import { dim, gray, green, italic, magenta } from "inken";
 
 export const store = {
     key: "viteshell",
@@ -18,7 +18,7 @@ ${green(`WELCOME TO THE COMMAND LINE INTERFACE`)}
 
 ${dim(italic("powered by") + "")}
 
-${gray(`<a href="https://github.com/henryhale/viteshell">ViteShell</a> ~ <a href="https://github.com/henryhale/inken">Inken</a> ~ <a href="https://github.com/henryhale/xterminal">XTerminal</a>
+${magenta(`<a href="https://github.com/henryhale/viteshell">ViteShell</a>`)} ${gray("~")} ${magenta(`<a href="https://github.com/henryhale/inken">Inken</a>`)} ${gray("~")} ${magenta(`<a href="https://github.com/henryhale/xterminal">XTerminal</a>
 `)}
 </div>`;
 }
