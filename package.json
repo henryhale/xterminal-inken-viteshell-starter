@@ -26,7 +26,7 @@
   "homepage": "https://github.com/henryhale/vix#readme",
   "dependencies": {
     "inken": "^1.0.3",
-    "viteshell": "^0.6.4",
+    "viteshell": "^0.6.6",
     "xterminal": "^2.1.7"
   },
   "devDependencies": {

@@ -9,8 +9,8 @@ dependencies:
     specifier: ^1.0.3
     version: 1.0.3
   viteshell:
-    specifier: ^0.6.4
-    version: 0.6.4
+    specifier: ^0.6.6
+    version: 0.6.6
   xterminal:
     specifier: ^2.1.7
     version: 2.1.7
@@ -455,8 +455,8 @@ packages:
       fsevents: 2.3.3
     dev: true
 
-  /viteshell@0.6.4:
-    resolution: {integrity: sha512-1dEZtUV6zLoMmiC5Axc7h+XxyCBMZOB9lSVATpSRn20srLgPyDFgBcO7T9ycVdPB9iffZrplfiFGkkRk6uj9pQ==}
+  /viteshell@0.6.6:
+    resolution: {integrity: sha512-LIDafT6Y+dyT6INu0Q4rNkXL87JPm8wo4BlZObNn9RtiAsZ8xXHAVVc4vKbaJHoTCllM6bOMcyG8NEBXr1VjdA==}
     engines: {node: '>=14', pnpm: '>=7'}
     dev: false
 
