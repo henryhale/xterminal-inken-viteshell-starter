@@ -12,23 +12,28 @@ const vsh = new ViteShell();
 const term = new XTerminal();
 
 // connect the shell to the terminal
+
+// display primary output in color: green
 vsh.onoutput = (data: string) => {
     term.write(green(data).toString());
 }
 
+// show errors in color: red
 vsh.onerror = (reason: string) => {
     term.write(red(reason).toString());
 };
 
+// clear terminal
 vsh.onclear = term.clear.bind(term);
 
+// on `exit` command, cleanup resources
 vsh.onexit = () => {
     store.write(vsh.exportState());
     term.dispose();
 
     document.body.innerHTML =
-        "<div class='reload'>The terminal process terminated with code: " + 
-        vsh.env["?"] + 
+        "<div class='reload'>The terminal process terminated with code: " +
+        vsh.env["?"] +
         "<br/> <a href='./'>Reload</a></div>";
 };
 
@@ -49,7 +54,7 @@ term.on("keypress", (ev: IKeyPress) => {
 // prompt style
 vsh.env["PS1"] = "" + red("┌[") + green("$USERNAME") + red("@") + cyan("$HOSTNAME") + red("]\n└$");
 
-// alias
+// define alias
 vsh.alias["println"] = "echo";
 
 // add a custom command
@@ -67,7 +72,7 @@ vsh.addCommand("login", {
     },
 });
 
-// re-write the greeting on clear
+// re-write the greeting on clearing screen
 term.on("clear", () => term.write(greetUser()));
 
 // setup the terminal
@@ -80,7 +85,7 @@ window.onload = () => {
     else store.write(vsh.exportState());
 
     // let's go
-    vsh.init();
+    vsh.reset();
 };
 
 // backup state to localstorage & cleanup
