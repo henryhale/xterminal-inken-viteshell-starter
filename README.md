@@ -14,6 +14,14 @@ Bootstrap your web-based CLI application
 
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/henryhale/vix)
 
+Or get started locally using
+
+```sh
+npx degit github:henryhale/vix
+npm install # pnpm install
+npm run dev # pnpm dev
+```
+
 ## Development
 
 1. Use this template or clone this repository
