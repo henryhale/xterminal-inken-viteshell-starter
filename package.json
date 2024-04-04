@@ -26,11 +26,11 @@
   "homepage": "https://github.com/henryhale/vix#readme",
   "dependencies": {
     "inken": "^1.0.3",
-    "viteshell": "^0.6.6",
-    "xterminal": "^2.1.7"
+    "viteshell": "^0.8.0",
+    "xterminal": "^2.1.9"
   },
   "devDependencies": {
-    "typescript": "^5.3.3",
-    "vite": "^5.0.10"
+    "typescript": "^5.4.3",
+    "vite": "^5.2.7"
   }
 }
