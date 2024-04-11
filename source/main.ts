@@ -23,10 +23,20 @@ vsh.onerror = (reason: string) => {
     term.write(red(reason).toString());
 };
 
-// clear terminal
+/**
+ * clear terminal
+ * 
+ * usage:
+ *  run the `clear` command
+ */ 
 vsh.onclear = term.clear.bind(term);
 
-// on `exit` command, cleanup resources
+/**
+ * cleanup resources
+ * 
+ * usage:
+ *  run `exit` command
+ */
 vsh.onexit = () => {
     store.write(vsh.exportState());
     term.dispose();
@@ -37,27 +47,66 @@ vsh.onexit = () => {
         "<br/> <a href='./'>Reload</a></div>";
 };
 
-// pass user input to the shell
-term.on("data", async (line) => {
-    await vsh.execute(line);
-});
+/**
+ * pass user input to the shell
+ * 
+ * usage:
+ *  type anything and hit Enter key
+ */
+term.on("data", (line) => vsh.execute(line));
 
-// abort execution on CTRL+C
+/**
+ * abort execution on CTRL+C
+ * 
+ * usage:
+ *  run `sleep 20` to pause for 20s
+ *  hit CTRL+C while the terminal is focused to abort
+ * before the task is complete
+ */
 term.on("keypress", (ev: IKeyPress) => {
     if (ev.ctrlKey && ev.key.toLowerCase() === "c") {
         ev.cancel();
-        vsh.abort();
+        vsh.abort("^C");
     }
 });
 
-// Configure shell
-// prompt style
+/**
+ * Configure shell environment
+ */
+
+/**
+ * prompt style
+ * 
+ * to view it:
+ *  run `export -p` and look for `PS1`
+ * alternative:
+ *  run `echo $PS1`
+ */
 vsh.env["PS1"] = "" + red("┌[") + green("$USERNAME") + red("@") + cyan("$HOSTNAME") + red("]\n└$");
 
-// define alias
+/**
+ * define alias
+ * 
+ * usage:
+ *  run `println hello` instead of `echo hello`
+ */
 vsh.alias["println"] = "echo";
 
-// add a custom command
+/**
+ * set timeout beyond which the process is terminated
+ * 
+ * usage:
+ *  run `sleep 15` and wait for 15s
+ * the process will be timed out after 10s
+ */
+vsh.setExecutionTimeout(10);
+
+/**
+ * add a custom command
+ * 
+ * usage:
+ *  run `login` to execute this command
+ */
 vsh.addCommand("login", {
     synopsis: "login",
     description: "Demo login process",
@@ -72,24 +121,34 @@ vsh.addCommand("login", {
     },
 });
 
-// re-write the greeting on clearing screen
+/**
+ * re-write the greeting on clearing screen
+ */
 term.on("clear", () => term.write(greetUser()));
 
-// setup the terminal
+/**
+ * setup the terminal
+ */
 term.mount("#app");
 
-// restore previously stored shell state
+/**
+ * restore previously stored shell state
+ */
 window.onload = () => {
     const backup = store.read();
     if (backup) vsh.loadState(backup);
     else store.write(vsh.exportState());
 
-    // let's go
+    /**
+     * PLAY TIME!
+     */
     vsh.reset();
 };
 
-// backup state to localstorage & cleanup
-window.onunload = () => {
+/**
+ * backup state to localstorage & cleanup
+ */
+window.onbeforeunload = () => {
     store.write(vsh.exportState());
     term.dispose();
 };
